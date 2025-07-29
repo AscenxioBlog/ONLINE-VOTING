@@ -61,6 +61,14 @@ const AppRoutes = () => {
           }
         />
         <Route
+          path="admin/add-post"
+          element={
+            <ProtectedRoute adminOnly>
+              <AddPost />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="admin/add-candidate"
           element={
             <ProtectedRoute adminOnly>

@@ -25,7 +25,7 @@ export const createPost = async (postData) => {
 
 export const getPosts = async () => {
   try {
-    const q = query(collection(db, 'posts'), orderBy('order', 'asc'));
+    const q = query(collection(db, 'posts'), orderBy('createdAt', 'asc'));
     const snapshot = await getDocs(q);
     return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
