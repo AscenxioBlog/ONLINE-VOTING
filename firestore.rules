@@ -1,0 +1,49 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper function to check if user is Computer Science student
+    function isComputerScienceStudent(userId) {
+      let userData = get(/databases/$(database)/documents/users/$(userId)).data;
+      return userData.department == 'Computer Science' && 
+             (userData.studentId.matches('FPI/HND/COM/[0-9]{2}/[0-9]+') || 
+              userData.studentId.matches('FPI/ND/[0-9]{2}/[0-9]+'));
+    }
+    
+    // Users can read/write their own user document if they're CS students
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId && 
+        (resource == null || isComputerScienceStudent(userId));
+      allow read: if request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    // Posts - only CS students can read, only admins can write
+    match /posts/{document} {
+      allow read: if request.auth != null && isComputerScienceStudent(request.auth.uid);
+      allow write: if request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    // Candidates - only CS students can read, only admins can write
+    match /candidates/{document} {
+      allow read: if request.auth != null && isComputerScienceStudent(request.auth.uid);
+      allow write: if request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    // Voting settings - only CS students can read, only admins can write
+    match /settings/{document} {
+      allow read: if request.auth != null && isComputerScienceStudent(request.auth.uid);
+      allow write: if request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    // Votes - only CS students can write their own vote, admins can read all votes
+    match /votes/{userId} {
+      allow write: if request.auth != null && request.auth.uid == userId && 
+        isComputerScienceStudent(userId);
+      allow read: if request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+  }
+}
