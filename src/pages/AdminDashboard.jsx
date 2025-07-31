@@ -163,79 +163,79 @@ const AdminDashboard = () => {
   const votedCount = voters.filter(voter => voter.hasVoted).length;
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-6 sm:mb-8">
           <button
             onClick={() => navigate('/dashboard')}
-            className="flex items-center space-x-2 text-gray-600 hover:text-gray-900"
+            className="flex items-center space-x-1 sm:space-x-2 px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm text-gray-600 hover:text-gray-900 hover:bg-white rounded-lg transition-all"
           >
-            <ArrowLeft className="w-5 h-5" />
-            <span>Back to Dashboard</span>
+            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span className="hidden sm:block">Back</span>
           </button>
-          <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-          <div></div>
+          <h1 className="text-xl sm:text-3xl font-bold text-gray-900">Admin Panel</h1>
+          <div className="w-8 sm:w-0"></div>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid md:grid-cols-5 gap-6 mb-8">
-          <div className="card bg-[peru] text-white p-6 rounded-lg shadow-lg">
-            <div className="flex items-center space-x-4">
-              <div className="bg-indigo-100 p-3 rounded-lg">
-                <Settings className="w-8 h-8 text-indigo-600" />
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-6 mb-6 sm:mb-8">
+          <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-3 sm:p-6 rounded-xl shadow-lg">
+            <div className="flex flex-col sm:flex-row items-center sm:space-x-4 space-y-2 sm:space-y-0">
+              <div className="bg-white bg-opacity-20 p-2 sm:p-3 rounded-lg">
+                <Settings className="w-4 h-4 sm:w-8 sm:h-8 text-white" />
               </div>
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900">{posts.length}</h3>
-                <p className="text-gray-600">Posts</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="card bg-[#7dcd3f] text-white p-6 rounded-lg shadow-lg">
-            <div className="flex items-center space-x-4">
-              <div className="bg-blue-100 p-3 rounded-lg">
-                <Users className="w-8 h-8 text-blue-600" />
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900">{candidates.length}</h3>
-                <p className="text-gray-600">Candidates</p>
+              <div className="text-center sm:text-left">
+                <h3 className="text-lg sm:text-2xl font-bold text-white">{posts.length}</h3>
+                <p className="text-xs sm:text-sm text-orange-100">Posts</p>
               </div>
             </div>
           </div>
 
-          <div className="card bg-[#33446b] text-white p-6 rounded-lg shadow-lg" >
-            <div className="flex items-center space-x-4">
-              <div className="bg-green-100 p-3 rounded-lg">
-                <UserCheck className="w-8 h-8 text-green-600" />
+          <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-3 sm:p-6 rounded-xl shadow-lg">
+            <div className="flex flex-col sm:flex-row items-center sm:space-x-4 space-y-2 sm:space-y-0">
+              <div className="bg-white bg-opacity-20 p-2 sm:p-3 rounded-lg">
+                <Users className="w-4 h-4 sm:w-8 sm:h-8 text-white" />
               </div>
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900">{voters.length}</h3>
-                <p className="text-gray-600">Registered Voters</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="card bg-[#211407] text-white p-6 rounded-lg shadow-lg">
-            <div className="flex items-center space-x-4">
-              <div className="bg-purple-100 p-3 rounded-lg">
-                <UserCheck className="w-8 h-8 text-purple-600" />
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white">{votedCount}</h3>
-                <p className="text-white">Votes Cast</p>
+              <div className="text-center sm:text-left">
+                <h3 className="text-lg sm:text-2xl font-bold text-white">{candidates.length}</h3>
+                <p className="text-xs sm:text-sm text-green-100">Candidates</p>
               </div>
             </div>
           </div>
 
-          <div className="card bg-[#cd3fba] text-white p-6 rounded-lg shadow-lg">
-            <div className="flex items-center space-x-4">
-              <div className="bg-yellow-100 p-3 rounded-lg">
-                <Users className="w-8 h-8 text-yellow-600" />
+          <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-3 sm:p-6 rounded-xl shadow-lg">
+            <div className="flex flex-col sm:flex-row items-center sm:space-x-4 space-y-2 sm:space-y-0">
+              <div className="bg-white bg-opacity-20 p-2 sm:p-3 rounded-lg">
+                <UserCheck className="w-4 h-4 sm:w-8 sm:h-8 text-white" />
               </div>
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900">{voters.length - votedCount}</h3>
-                <p className="text-gray-600">Pending Votes</p>
+              <div className="text-center sm:text-left">
+                <h3 className="text-lg sm:text-2xl font-bold text-white">{voters.length}</h3>
+                <p className="text-xs sm:text-sm text-blue-100">Voters</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-3 sm:p-6 rounded-xl shadow-lg">
+            <div className="flex flex-col sm:flex-row items-center sm:space-x-4 space-y-2 sm:space-y-0">
+              <div className="bg-white bg-opacity-20 p-2 sm:p-3 rounded-lg">
+                <UserCheck className="w-4 h-4 sm:w-8 sm:h-8 text-white" />
+              </div>
+              <div className="text-center sm:text-left">
+                <h3 className="text-lg sm:text-2xl font-bold text-white">{votedCount}</h3>
+                <p className="text-xs sm:text-sm text-purple-100">Cast</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-r from-pink-500 to-pink-600 text-white p-3 sm:p-6 rounded-xl shadow-lg">
+            <div className="flex flex-col sm:flex-row items-center sm:space-x-4 space-y-2 sm:space-y-0">
+              <div className="bg-white bg-opacity-20 p-2 sm:p-3 rounded-lg">
+                <Users className="w-4 h-4 sm:w-8 sm:h-8 text-white" />
+              </div>
+              <div className="text-center sm:text-left">
+                <h3 className="text-lg sm:text-2xl font-bold text-white">{voters.length - votedCount}</h3>
+                <p className="text-xs sm:text-sm text-pink-100">Pending</p>
               </div>
             </div>
           </div>
@@ -245,57 +245,57 @@ const AdminDashboard = () => {
         <TestData />
 
         {/* Action Buttons */}
-        <div className="grid md:grid-cols-5 gap-6 mb-8">
-          <Link to="/admin/add-post" className="card hover:shadow-xl transition-shadow cursor-pointer">
-            <div className="text-center py-6">
-              <div className="bg-indigo-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <Plus className="w-8 h-8 text-indigo-600" />
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-6 mb-6 sm:mb-8">
+          <Link to="/admin/add-post" className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-indigo-100">
+            <div className="text-center p-3 sm:py-6 sm:px-4">
+              <div className="bg-gradient-to-r from-indigo-100 to-blue-100 p-2 sm:p-4 rounded-full w-10 h-10 sm:w-16 sm:h-16 mx-auto mb-2 sm:mb-4 flex items-center justify-center">
+                <Plus className="w-5 h-5 sm:w-8 sm:h-8 text-indigo-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Add Post</h3>
-              <p className="text-gray-600">Add new election posts</p>
+              <h3 className="text-sm sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">Add Post</h3>
+              <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">New election posts</p>
             </div>
           </Link>
 
-          <Link to="/admin/add-candidate" className="card hover:shadow-xl transition-shadow cursor-pointer">
-            <div className="text-center py-6">
-              <div className="bg-primary-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <Plus className="w-8 h-8 text-primary-600" />
+          <Link to="/admin/add-candidate" className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-blue-100">
+            <div className="text-center p-3 sm:py-6 sm:px-4">
+              <div className="bg-gradient-to-r from-blue-100 to-cyan-100 p-2 sm:p-4 rounded-full w-10 h-10 sm:w-16 sm:h-16 mx-auto mb-2 sm:mb-4 flex items-center justify-center">
+                <Plus className="w-5 h-5 sm:w-8 sm:h-8 text-blue-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Add Candidate</h3>
-              <p className="text-gray-600">Add candidates to posts</p>
+              <h3 className="text-sm sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">Add Candidate</h3>
+              <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">Add to posts</p>
             </div>
           </Link>
 
           <button 
             onClick={() => setShowVotingSettings(true)}
-            className="card hover:shadow-xl transition-shadow cursor-pointer text-left"
+            className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-orange-100"
           >
-            <div className="text-center py-6">
-              <div className="bg-orange-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <Clock className="w-8 h-8 text-orange-600" />
+            <div className="text-center p-3 sm:py-6 sm:px-4">
+              <div className="bg-gradient-to-r from-orange-100 to-yellow-100 p-2 sm:p-4 rounded-full w-10 h-10 sm:w-16 sm:h-16 mx-auto mb-2 sm:mb-4 flex items-center justify-center">
+                <Clock className="w-5 h-5 sm:w-8 sm:h-8 text-orange-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Voting Time</h3>
-              <p className="text-gray-600">Set voting start/end time</p>
+              <h3 className="text-sm sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">Voting Time</h3>
+              <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">Set schedule</p>
             </div>
           </button>
 
-          <Link to="/admin/voters" className="card hover:shadow-xl transition-shadow cursor-pointer">
-            <div className="text-center py-6">
-              <div className="bg-green-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <Users className="w-8 h-8 text-green-600" />
+          <Link to="/admin/voters" className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-green-100">
+            <div className="text-center p-3 sm:py-6 sm:px-4">
+              <div className="bg-gradient-to-r from-green-100 to-emerald-100 p-2 sm:p-4 rounded-full w-10 h-10 sm:w-16 sm:h-16 mx-auto mb-2 sm:mb-4 flex items-center justify-center">
+                <Users className="w-5 h-5 sm:w-8 sm:h-8 text-green-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Manage Voters</h3>
-              <p className="text-gray-600">View registered voters</p>
+              <h3 className="text-sm sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">Voters</h3>
+              <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">Manage users</p>
             </div>
           </Link>
 
-          <button onClick={handleResetVoting} className="card hover:shadow-xl transition-shadow cursor-pointer">
-            <div className="text-center py-6">
-              <div className="bg-red-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <RotateCcw className="w-8 h-8 text-red-600" />
+          <button onClick={handleResetVoting} className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-red-100 hover:bg-red-50">
+            <div className="text-center p-3 sm:py-6 sm:px-4">
+              <div className="bg-gradient-to-r from-red-100 to-pink-100 p-2 sm:p-4 rounded-full w-10 h-10 sm:w-16 sm:h-16 mx-auto mb-2 sm:mb-4 flex items-center justify-center">
+                <RotateCcw className="w-5 h-5 sm:w-8 sm:h-8 text-red-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Reset Voting</h3>
-              <p className="text-gray-600">Clear all votes and reset</p>
+              <h3 className="text-sm sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">Reset</h3>
+              <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">Clear votes</p>
             </div>
           </button>
         </div>
@@ -303,12 +303,13 @@ const AdminDashboard = () => {
         {/* Posts and Candidates */}
         <div className="space-y-8">
           {/* Posts List */}
-          <div className="card">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">Election Posts</h2>
-              <Link to="/admin/add-post" className="btn-primary flex items-center space-x-2">
-                <Plus className="w-4 h-4" />
-                <span>Add Post</span>
+          <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
+              <h2 className="text-lg sm:text-2xl font-bold text-gray-900">Election Posts</h2>
+              <Link to="/admin/add-post" className="btn-primary flex items-center space-x-1 sm:space-x-2 px-3 py-2 text-xs sm:text-sm">
+                <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="hidden sm:block">Add Post</span>
+                <span className="sm:hidden">Add</span>
               </Link>
             </div>
 
@@ -317,33 +318,33 @@ const AdminDashboard = () => {
                 {posts.map(post => {
                   const postCandidates = candidates.filter(c => c.postId === post.id);
                   return (
-                    <div key={post.id} className="border border-gray-200 rounded-lg p-4">
-                      <div className="flex items-center justify-between mb-4">
-                        <div>
-                          <h3 className="text-lg font-semibold text-gray-900">{post.title}</h3>
-                          <p className="text-sm text-gray-600">{postCandidates.length} candidates</p>
+                    <div key={post.id} className="border border-gray-200 rounded-lg p-3 sm:p-4">
+                      <div className="flex items-center justify-between mb-3 sm:mb-4">
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-base sm:text-lg font-semibold text-gray-900 truncate">{post.title}</h3>
+                          <p className="text-xs sm:text-sm text-gray-600">{postCandidates.length} candidates</p>
                         </div>
                         <button
                           onClick={() => handleDeletePost(post.id)}
-                          className="text-red-600 hover:text-red-800 transition-colors"
+                          className="text-red-600 hover:text-red-800 transition-colors p-1 sm:p-2 hover:bg-red-50 rounded"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-3 h-3 sm:w-4 sm:h-4" />
                         </button>
                       </div>
                       
                       {postCandidates.length > 0 && (
                         <div className="space-y-2">
                           {postCandidates.map(candidate => (
-                            <div key={candidate.id} className="flex items-center justify-between bg-gray-50 p-3 rounded">
-                              <div>
-                                <span className="font-medium text-gray-900">{candidate.name}</span>
-                                <span className="ml-2 bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">
+                            <div key={candidate.id} className="flex items-center justify-between bg-gray-50 p-2 sm:p-3 rounded">
+                              <div className="flex-1 min-w-0">
+                                <span className="font-medium text-gray-900 text-sm sm:text-base truncate block">{candidate.name}</span>
+                                <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs inline-block mt-1">
                                   {candidate.voteCount || 0} votes
                                 </span>
                               </div>
                               <button
                                 onClick={() => handleDeleteCandidate(candidate.id)}
-                                className="text-red-600 hover:text-red-800 transition-colors"
+                                className="text-red-600 hover:text-red-800 transition-colors p-1 hover:bg-red-50 rounded ml-2"
                               >
                                 <Trash2 className="w-3 h-3" />
                               </button>
@@ -356,8 +357,8 @@ const AdminDashboard = () => {
                 })}
               </div>
             ) : (
-              <div className="text-center py-8">
-                <p className="text-gray-600">No posts added yet.</p>
+              <div className="text-center py-6 sm:py-8">
+                <p className="text-sm sm:text-base text-gray-600">No posts added yet.</p>
               </div>
             )}
           </div>
@@ -365,9 +366,9 @@ const AdminDashboard = () => {
 
         {/* Voting Settings Modal */}
         {showVotingSettings && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 w-full max-w-md">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Voting Time Settings</h3>
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-xl shadow-xl p-4 sm:p-6 w-full max-w-md">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Voting Time Settings</h3>
               
               <div className="space-y-4">
                 <div>
@@ -378,7 +379,7 @@ const AdminDashboard = () => {
                     type="datetime-local"
                     value={votingStart}
                     onChange={(e) => setVotingStart(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
                   />
                 </div>
                 
@@ -390,7 +391,7 @@ const AdminDashboard = () => {
                     type="datetime-local"
                     value={votingEnd}
                     onChange={(e) => setVotingEnd(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
                   />
                 </div>
               </div>
@@ -398,13 +399,13 @@ const AdminDashboard = () => {
               <div className="flex space-x-3 mt-6">
                 <button
                   onClick={handleSaveVotingSettings}
-                  className="flex-1 btn-primary"
+                  className="flex-1 btn-primary text-sm"
                 >
-                  Save Settings
+                  Save
                 </button>
                 <button
                   onClick={() => setShowVotingSettings(false)}
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 text-sm"
                 >
                   Cancel
                 </button>

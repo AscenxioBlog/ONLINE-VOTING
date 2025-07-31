@@ -109,79 +109,79 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-4 py-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <header className="bg-white shadow-lg border-b">
+        <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="bg-primary-600 p-2 rounded-lg">
-                <Vote className="w-6 h-6 text-white" />
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-1.5 sm:p-2 rounded-lg">
+                <Vote className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
-              <h1 className="text-2xl font-bold text-gray-900">E-Voting Dashboard</h1>
+              <h1 className="text-lg sm:text-2xl font-bold text-gray-900 truncate">E-Voting</h1>
             </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-gray-600">Welcome, {userInfo?.name}</span>
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <span className="hidden sm:block text-sm text-gray-600 truncate max-w-32">Welcome, {userInfo?.name}</span>
               <button
                 onClick={handleLogout}
-                className="flex items-center space-x-2 text-gray-600 hover:text-red-600 transition-colors"
+                className="flex items-center space-x-1 sm:space-x-2 px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
               >
-                <LogOut className="w-4 h-4" />
-                <span>Logout</span>
+                <LogOut className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="hidden sm:block">Logout</span>
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Stats Cards */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
-          <div className="card bg-indigo-500 text-white p-6 rounded-lg shadow-lg">
-            <div className="flex items-center space-x-4">
-              <div className="bg-white bg-opacity-20 p-3 rounded-lg">
-                <Settings className="w-8 h-8 text-white" />
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
+          <div className="bg-gradient-to-r from-indigo-500 to-indigo-600 text-white p-3 sm:p-6 rounded-xl shadow-lg">
+            <div className="flex flex-col sm:flex-row items-center sm:space-x-4 space-y-2 sm:space-y-0">
+              <div className="bg-white bg-opacity-20 p-2 sm:p-3 rounded-lg">
+                <Settings className="w-5 h-5 sm:w-8 sm:h-8 text-white" />
               </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white">{stats.totalPosts}</h3>
-                <p className="text-indigo-100">Election Posts</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="card bg-green-500 text-white p-6 rounded-lg shadow-lg">
-            <div className="flex items-center space-x-4">
-              <div className="bg-white bg-opacity-20 p-3 rounded-lg">
-                <Users className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white">{stats.totalCandidates}</h3>
-                <p className="text-green-100">Total Candidates</p>
+              <div className="text-center sm:text-left">
+                <h3 className="text-lg sm:text-2xl font-bold text-white">{stats.totalPosts}</h3>
+                <p className="text-xs sm:text-sm text-indigo-100">Posts</p>
               </div>
             </div>
           </div>
 
-          <div className="card bg-purple-500 text-white p-6 rounded-lg shadow-lg">
-            <div className="flex items-center space-x-4">
-              <div className="bg-white bg-opacity-20 p-3 rounded-lg">
-                <Vote className="w-8 h-8 text-white" />
+          <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-3 sm:p-6 rounded-xl shadow-lg">
+            <div className="flex flex-col sm:flex-row items-center sm:space-x-4 space-y-2 sm:space-y-0">
+              <div className="bg-white bg-opacity-20 p-2 sm:p-3 rounded-lg">
+                <Users className="w-5 h-5 sm:w-8 sm:h-8 text-white" />
               </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white">{stats.totalVoters}</h3>
-                <p className="text-purple-100">Registered Voters</p>
+              <div className="text-center sm:text-left">
+                <h3 className="text-lg sm:text-2xl font-bold text-white">{stats.totalCandidates}</h3>
+                <p className="text-xs sm:text-sm text-green-100">Candidates</p>
               </div>
             </div>
           </div>
 
-          <div className={`card p-6 rounded-lg shadow-lg ${stats.hasVoted ? 'bg-green-500 text-white' : 'bg-yellow-500 text-white'}`}>
-            <div className="flex items-center space-x-4">
-              <div className="bg-white bg-opacity-20 p-3 rounded-lg">
-                <Vote className="w-8 h-8 text-white" />
+          <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-3 sm:p-6 rounded-xl shadow-lg">
+            <div className="flex flex-col sm:flex-row items-center sm:space-x-4 space-y-2 sm:space-y-0">
+              <div className="bg-white bg-opacity-20 p-2 sm:p-3 rounded-lg">
+                <Vote className="w-5 h-5 sm:w-8 sm:h-8 text-white" />
               </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white">
-                  {stats.hasVoted ? 'Voted' : 'Not Voted'}
+              <div className="text-center sm:text-left">
+                <h3 className="text-lg sm:text-2xl font-bold text-white">{stats.totalVoters}</h3>
+                <p className="text-xs sm:text-sm text-purple-100">Voters</p>
+              </div>
+            </div>
+          </div>
+
+          <div className={`p-3 sm:p-6 rounded-xl shadow-lg ${stats.hasVoted ? 'bg-gradient-to-r from-green-500 to-green-600 text-white' : 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-white'}`}>
+            <div className="flex flex-col sm:flex-row items-center sm:space-x-4 space-y-2 sm:space-y-0">
+              <div className="bg-white bg-opacity-20 p-2 sm:p-3 rounded-lg">
+                <Vote className="w-5 h-5 sm:w-8 sm:h-8 text-white" />
+              </div>
+              <div className="text-center sm:text-left">
+                <h3 className="text-lg sm:text-2xl font-bold text-white">
+                  {stats.hasVoted ? 'Voted' : 'Pending'}
                 </h3>
-                <p className={stats.hasVoted ? 'text-green-100' : 'text-yellow-100'}>Your Status</p>
+                <p className={`text-xs sm:text-sm ${stats.hasVoted ? 'text-green-100' : 'text-yellow-100'}`}>Status</p>
               </div>
             </div>
           </div>
@@ -189,98 +189,98 @@ const Dashboard = () => {
 
         {/* Voting Status */}
         {votingSettings && (
-          <div className="card mb-8">
+          <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 mb-6 sm:mb-8">
             <div className="text-center">
-              <Clock className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Voting Period</h3>
-              <div className="grid md:grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-gray-600">Starts:</span>
-                  <div className="font-medium">{votingSettings.votingStart?.toDate().toLocaleString()}</div>
+              <Clock className="w-8 h-8 sm:w-12 sm:h-12 text-gray-400 mx-auto mb-3 sm:mb-4" />
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Voting Period</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
+                <div className="bg-gray-50 p-3 rounded-lg">
+                  <span className="text-gray-600 block mb-1">Starts:</span>
+                  <div className="font-medium text-gray-900">{votingSettings.votingStart?.toDate().toLocaleString()}</div>
                 </div>
-                <div>
-                  <span className="text-gray-600">Ends:</span>
-                  <div className="font-medium">{votingSettings.votingEnd?.toDate().toLocaleString()}</div>
+                <div className="bg-gray-50 p-3 rounded-lg">
+                  <span className="text-gray-600 block mb-1">Ends:</span>
+                  <div className="font-medium text-gray-900">{votingSettings.votingEnd?.toDate().toLocaleString()}</div>
                 </div>
               </div>
-              <div className={`mt-4 px-4 py-2 rounded-full text-sm font-medium ${
+              <div className={`mt-4 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium inline-block ${
                 isVotingActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
               }`}>
-                {isVotingActive ? 'Voting is Active' : 'Voting is Inactive'}
+                {isVotingActive ? '🟢 Voting Active' : '🔴 Voting Inactive'}
               </div>
             </div>
           </div>
         )}
 
-        {/* Action Cards */}
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* Action Buttons */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
           {!stats.hasVoted && isVotingActive && (
-            <Link to="/vote" className="card hover:shadow-xl transition-shadow cursor-pointer">
-              <div className="text-center py-8">
-                <div className="bg-primary-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                  <Vote className="w-8 h-8 text-primary-600" />
+            <Link to="/vote" className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-blue-100">
+              <div className="text-center p-4 sm:py-8 sm:px-6">
+                <div className="bg-gradient-to-r from-blue-100 to-indigo-100 p-3 sm:p-4 rounded-full w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 flex items-center justify-center">
+                  <Vote className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Cast Your Vote</h3>
-                <p className="text-gray-600">Participate in the student election</p>
+                <h3 className="text-base sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">Cast Vote</h3>
+                <p className="text-xs sm:text-sm text-gray-600">Participate in election</p>
               </div>
             </Link>
           )}
           
           {!stats.hasVoted && !isVotingActive && (
-            <div className="card bg-gray-100 cursor-not-allowed">
-              <div className="text-center py-8">
-                <div className="bg-gray-200 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                  <Vote className="w-8 h-8 text-gray-400" />
+            <div className="bg-gray-100 rounded-xl shadow-lg cursor-not-allowed border border-gray-200">
+              <div className="text-center p-4 sm:py-8 sm:px-6">
+                <div className="bg-gray-200 p-3 sm:p-4 rounded-full w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 flex items-center justify-center">
+                  <Vote className="w-6 h-6 sm:w-8 sm:h-8 text-gray-400" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-500 mb-2">Voting Unavailable</h3>
-                <p className="text-gray-400">Voting is not currently active</p>
+                <h3 className="text-base sm:text-xl font-semibold text-gray-500 mb-1 sm:mb-2">Voting Closed</h3>
+                <p className="text-xs sm:text-sm text-gray-400">Not currently active</p>
               </div>
             </div>
           )}
 
-          <Link to="/results" className="card hover:shadow-xl transition-shadow cursor-pointer">
-            <div className="text-center py-8">
-              <div className="bg-green-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <BarChart3 className="w-8 h-8 text-green-600" />
+          <Link to="/results" className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-green-100">
+            <div className="text-center p-4 sm:py-8 sm:px-6">
+              <div className="bg-gradient-to-r from-green-100 to-emerald-100 p-3 sm:p-4 rounded-full w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 flex items-center justify-center">
+                <BarChart3 className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">View Results</h3>
-              <p className="text-gray-600">Check live election results</p>
+              <h3 className="text-base sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">View Results</h3>
+              <p className="text-xs sm:text-sm text-gray-600">Live election results</p>
             </div>
           </Link>
 
           {userRole === 'admin' && (
-            <Link to="/admin" className="card hover:shadow-xl transition-shadow cursor-pointer">
-              <div className="text-center py-8">
-                <div className="bg-purple-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                  <Settings className="w-8 h-8 text-purple-600" />
+            <Link to="/admin" className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-purple-100">
+              <div className="text-center p-4 sm:py-8 sm:px-6">
+                <div className="bg-gradient-to-r from-purple-100 to-violet-100 p-3 sm:p-4 rounded-full w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 flex items-center justify-center">
+                  <Settings className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Admin Panel</h3>
-                <p className="text-gray-600">Manage candidates and voters</p>
+                <h3 className="text-base sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">Admin Panel</h3>
+                <p className="text-xs sm:text-sm text-gray-600">Manage system</p>
               </div>
             </Link>
           )}
 
           {userRole === 'admin' && (
-            <button onClick={handleResetVoting} className="card hover:shadow-xl transition-shadow cursor-pointer bg-red-50 hover:bg-red-100">
-              <div className="text-center py-8">
-                <div className="bg-red-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                  <RotateCcw className="w-8 h-8 text-red-600" />
+            <button onClick={handleResetVoting} className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-red-100 hover:bg-red-50">
+              <div className="text-center p-4 sm:py-8 sm:px-6">
+                <div className="bg-gradient-to-r from-red-100 to-pink-100 p-3 sm:p-4 rounded-full w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 flex items-center justify-center">
+                  <RotateCcw className="w-6 h-6 sm:w-8 sm:h-8 text-red-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-red-900 mb-2">Reset Voting</h3>
-                <p className="text-red-600">Clear all votes and candidate records</p>
+                <h3 className="text-base sm:text-xl font-semibold text-red-900 mb-1 sm:mb-2">Reset Voting</h3>
+                <p className="text-xs sm:text-sm text-red-600">Clear all data</p>
               </div>
             </button>
           )}
         </div>
 
         {stats.hasVoted && (
-          <div className="mt-8 card bg-green-50 border-green-200">
-            <div className="text-center py-4">
-              <div className="text-green-600 mb-2">
-                <Vote className="w-8 h-8 mx-auto" />
+          <div className="mt-6 sm:mt-8 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl shadow-lg p-4 sm:p-6">
+            <div className="text-center">
+              <div className="bg-green-100 p-3 rounded-full w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 flex items-center justify-center">
+                <Vote className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold text-green-800">Thank you for voting!</h3>
-              <p className="text-green-600">Your vote has been recorded successfully.</p>
+              <h3 className="text-base sm:text-lg font-semibold text-green-800 mb-2">Thank you for voting! 🎉</h3>
+              <p className="text-sm sm:text-base text-green-600">Your vote has been recorded successfully.</p>
             </div>
           </div>
         )}
