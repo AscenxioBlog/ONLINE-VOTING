@@ -24,6 +24,9 @@ const Register = ({ onToggle }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    console.log('Form data:', formData);
+    console.log('Student ID validation:', validateComputerScienceStudentId(formData.studentId));
+    
     // Validate Computer Science student ID
     if (!validateComputerScienceStudentId(formData.studentId)) {
       toast.error('Invalid student ID format. Only Computer Science students can register.\nFormat: FPI/HND/COM/YY/XXX or FPI/ND/YY/XXX');
@@ -36,18 +39,21 @@ const Register = ({ onToggle }) => {
     }
 
     setLoading(true);
+    console.log('Starting registration process...');
 
     try {
+      console.log('Creating user with email:', formData.email);
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
+      console.log('User created successfully:', userCredential.user.uid);
 
       const programType = extractProgramType(formData.studentId);
+      console.log('Program type:', programType);
 
-      // Save user data to Firestore
-      await setDoc(doc(db, 'users', userCredential.user.uid), {
+      const userData = {
         name: formData.name,
         email: formData.email,
         studentId: formData.studentId.toUpperCase(),
@@ -56,11 +62,27 @@ const Register = ({ onToggle }) => {
         role: 'voter',
         hasVoted: false,
         createdAt: new Date()
-      });
+      };
+      console.log('Saving user data:', userData);
 
-      toast.success('Registration successful!');
+      // Save user data to Firestore
+      await setDoc(doc(db, 'users', userCredential.user.uid), userData);
+      console.log('User data saved to Firestore');
+
+      toast.success('Registration successful! Please login to continue.');
+      onToggle(); // Switch to login form
     } catch (error) {
-      toast.error(error.message);
+      console.error('Registration error:', error);
+      if (error.code === 'auth/email-already-in-use') {
+        toast.error('This email is already registered. Please login instead.');
+        onToggle(); // Switch to login form
+      } else if (error.code === 'auth/weak-password') {
+        toast.error('Password should be at least 6 characters long.');
+      } else if (error.code === 'auth/invalid-email') {
+        toast.error('Please enter a valid email address.');
+      } else {
+        toast.error(`Registration failed: ${error.message}`);
+      }
     } finally {
       setLoading(false);
     }

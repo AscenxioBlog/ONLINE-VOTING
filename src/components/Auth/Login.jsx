@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { auth, db } from '../../firebase/config';
 import { validateComputerScienceStudentId } from '../../utils/validation';
+import { useAuth } from '../../hooks/useAuth';
 import { Eye, EyeOff, Mail, Lock, GraduationCap } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -13,6 +14,13 @@ const Login = ({ onToggle }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate('/dashboard');
+    }
+  }, [currentUser, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,18 +55,16 @@ const Login = ({ onToggle }) => {
       
       await signInWithEmailAndPassword(auth, email, password);
       toast.success('Login successful!');
-      
-      // Small delay to ensure auth state is updated
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 100);
     } catch (error) {
+      console.error('Login error:', error);
       if (error.code === 'auth/user-not-found') {
         toast.error('Account not found. Please register first.');
       } else if (error.code === 'auth/wrong-password') {
         toast.error('Incorrect password.');
+      } else if (error.code === 'auth/invalid-email') {
+        toast.error('Please enter a valid email address.');
       } else {
-        toast.error('Login failed. Please try again.');
+        toast.error(`Login failed: ${error.message}`);
       }
     } finally {
       setLoading(false);

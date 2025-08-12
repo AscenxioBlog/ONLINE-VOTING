@@ -9,10 +9,14 @@ service cloud.firestore {
               userData.studentId.matches('FPI/ND/[0-9]{2}/[0-9]+'));
     }
     
-    // Users can read/write their own user document if they're CS students
+    // Users can read/write their own user document
     match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId && 
+      // Allow creation of user document during registration
+      allow create: if request.auth != null && request.auth.uid == userId;
+      // Allow read/write for existing users if they're CS students
+      allow read, update: if request.auth != null && request.auth.uid == userId && 
         (resource == null || isComputerScienceStudent(userId));
+      // Allow admins to read all user documents
       allow read: if request.auth != null && 
         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
     }
