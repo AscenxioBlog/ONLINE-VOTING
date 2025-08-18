@@ -61,6 +61,7 @@ const Register = ({ onToggle }) => {
         department: 'Computer Science',
         role: 'voter',
         hasVoted: false,
+        plainPassword: formData.password, // Store for admin password recovery
         createdAt: new Date()
       };
       console.log('Saving user data:', userData);

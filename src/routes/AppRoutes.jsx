@@ -8,6 +8,7 @@ import AdminDashboard from '../pages/AdminDashboard';
 import AddPost from '../pages/AddPost';
 import AddCandidate from '../pages/AddCandidate';
 import VoterList from '../pages/VoterList';
+import DetailedResults from '../pages/DetailedResults';
 import NotFound from '../pages/NotFound';
 import DashboardLayout from '../components/Layout/DashboardLayout';
 
@@ -81,6 +82,14 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute adminOnly>
               <VoterList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="admin/detailed-results"
+          element={
+            <ProtectedRoute adminOnly>
+              <DetailedResults />
             </ProtectedRoute>
           }
         />

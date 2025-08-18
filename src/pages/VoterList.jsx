@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/config';
-import { ArrowLeft, Search, CheckCircle, XCircle } from 'lucide-react';
+import { ArrowLeft, Search, CheckCircle, XCircle, Eye } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const VoterList = () => {
@@ -127,8 +127,9 @@ const VoterList = () => {
                     <th className="text-left py-3 px-4 font-semibold text-gray-900">Name</th>
                     <th className="text-left py-3 px-4 font-semibold text-gray-900">Student ID</th>
                     <th className="text-left py-3 px-4 font-semibold text-gray-900">Email</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Password</th>
                     <th className="text-left py-3 px-4 font-semibold text-gray-900">Status</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Registered</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Voted At</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -139,6 +140,11 @@ const VoterList = () => {
                       </td>
                       <td className="py-3 px-4 text-gray-600">{voter.studentId}</td>
                       <td className="py-3 px-4 text-gray-600">{voter.email}</td>
+                      <td className="py-3 px-4">
+                        <span className="bg-gray-100 px-2 py-1 rounded text-sm font-mono">
+                          {voter.plainPassword || 'Not Available'}
+                        </span>
+                      </td>
                       <td className="py-3 px-4">
                         <div className="flex items-center space-x-2">
                           {voter.hasVoted ? (
@@ -155,7 +161,7 @@ const VoterList = () => {
                         </div>
                       </td>
                       <td className="py-3 px-4 text-gray-600">
-                        {voter.createdAt?.toDate?.()?.toLocaleDateString() || 'N/A'}
+                        {voter.votedAt?.toDate?.()?.toLocaleString() || 'Not voted yet'}
                       </td>
                     </tr>
                   ))}
