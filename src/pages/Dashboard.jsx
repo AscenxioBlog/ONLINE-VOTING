@@ -5,6 +5,7 @@ import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import { getPosts, getCandidates, hasUserVoted, getVotingSettings, resetVoting } from '../services/firebaseService';
 import { db } from '../firebase/config';
 import { Vote, BarChart3, Users, LogOut, Settings, Clock, RotateCcw } from 'lucide-react';
+import LiveResults from '../components/Results/LiveResults';
 import toast from 'react-hot-toast';
 
 const Dashboard = () => {
@@ -294,6 +295,19 @@ const Dashboard = () => {
             </div>
           </div>
         )}
+
+        {/* Live Results Section */}
+        <div className="mt-6 sm:mt-8">
+          <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
+              <h2 className="text-lg sm:text-2xl font-bold text-gray-900">Live Results</h2>
+              <Link to="/results" className="text-blue-600 hover:text-blue-800 text-sm sm:text-base font-medium">
+                View Full Results →
+              </Link>
+            </div>
+            <LiveResults />
+          </div>
+        </div>
       </div>
     </div>
   );

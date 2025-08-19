@@ -13,26 +13,9 @@ const VoteCard = ({ candidate, isSelected, onSelect, disabled }) => {
     >
       <div className="flex items-center space-x-4">
         <div className="flex-shrink-0">
-          {candidate.imageUrl ? (
-            <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200">
-              <img
-                src={candidate.imageUrl}
-                alt={candidate.name}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.nextSibling.style.display = 'flex';
-                }}
-              />
-              <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center" style={{display: 'none'}}>
-                <User className="w-8 h-8 text-gray-500" />
-              </div>
-            </div>
-          ) : (
-            <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
-              <User className="w-8 h-8 text-gray-500" />
-            </div>
-          )}
+          <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
+            <User className="w-8 h-8 text-gray-500" />
+          </div>
         </div>
         
         <div className="flex-1">

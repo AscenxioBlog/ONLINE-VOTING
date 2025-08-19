@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, connectAuthEmulator } from 'firebase/auth';
 import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
 
+
 // const firebaseConfig = {
 //   apiKey: "your-api-key-here",
 //   authDomain: "your-project-id.firebaseapp.com",
@@ -22,8 +23,14 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+
+// Initialize services
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+
+// Export services
+export { auth, db };
 
 // Ensure auth persistence
 auth.settings = {

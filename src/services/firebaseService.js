@@ -44,7 +44,6 @@ export const createCandidate = async (candidateData) => {
   await setDoc(docRef, {
     ...candidateData,
     voteCount: 0,
-    imageUrl: candidateData.imageUrl || null,
     createdAt: new Date()
   });
   return docRef.id;

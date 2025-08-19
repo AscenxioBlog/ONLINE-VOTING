@@ -9,9 +9,9 @@ const AddCandidate = () => {
   const [formData, setFormData] = useState({
     name: '',
     postId: '',
-    description: '',
-    imageUrl: ''
+    description: ''
   });
+
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingPosts, setLoadingPosts] = useState(true);
@@ -41,6 +41,8 @@ const AddCandidate = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -134,22 +136,7 @@ const AddCandidate = () => {
                 )}
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Candidate Image URL (Optional)
-                </label>
-                <input
-                  type="url"
-                  name="imageUrl"
-                  value={formData.imageUrl}
-                  onChange={handleChange}
-                  className="input-field"
-                  placeholder="https://example.com/candidate-photo.jpg"
-                />
-                <p className="text-xs text-gray-500 mt-1">
-                  Provide a direct link to the candidate's photo
-                </p>
-              </div>
+
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
