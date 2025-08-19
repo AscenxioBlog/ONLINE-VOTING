@@ -2,6 +2,7 @@ import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { Vote, BarChart3, Users, Settings, LogOut, Home } from 'lucide-react';
 import toast from 'react-hot-toast';
+import Footer from './Footer';
 
 const DashboardLayout = () => {
   const { userRole, logout } = useAuth();
@@ -72,8 +73,11 @@ const DashboardLayout = () => {
       </div>
 
       {/* Main Content */}
-      <div className="lg:ml-64 min-h-screen pb-16 lg:pb-0">
-        <Outlet />
+      <div className="lg:ml-64 flex flex-col min-h-screen pb-16 lg:pb-0">
+        <div className="flex-1">
+          <Outlet />
+        </div>
+        <Footer />
       </div>
 
       {/* Mobile Bottom Navigation */}

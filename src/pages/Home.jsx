@@ -87,6 +87,18 @@ const Home = () => {
           </div>
         </div>
 
+        {/* Footer */}
+        <footer className="mt-16 py-8 border-t border-gray-200">
+          <div className="text-center">
+            <p className="text-gray-600 mb-2">
+              &copy; 2024 Student E-Voting System. All rights reserved.
+            </p>
+            <p className="text-sm text-gray-500">
+              Built for transparent and secure student elections
+            </p>
+          </div>
+        </footer>
+
         {/* Auth Modal */}
         {showModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
