@@ -245,7 +245,7 @@ const AdminDashboard = () => {
         <TestData />
 
         {/* Action Buttons */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-6 mb-6 sm:mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3 sm:gap-6 mb-6 sm:mb-8">
           <Link to="/admin/add-post" className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-indigo-100">
             <div className="text-center p-3 sm:py-6 sm:px-4">
               <div className="bg-gradient-to-r from-indigo-100 to-blue-100 p-2 sm:p-4 rounded-full w-10 h-10 sm:w-16 sm:h-16 mx-auto mb-2 sm:mb-4 flex items-center justify-center">
@@ -289,13 +289,23 @@ const AdminDashboard = () => {
             </div>
           </Link>
 
-          <Link to="/admin/detailed-results" className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-cyan-100">
+          <Link to="/admin/voter-limits" className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-cyan-100">
             <div className="text-center p-3 sm:py-6 sm:px-4">
               <div className="bg-gradient-to-r from-cyan-100 to-blue-100 p-2 sm:p-4 rounded-full w-10 h-10 sm:w-16 sm:h-16 mx-auto mb-2 sm:mb-4 flex items-center justify-center">
-                <BarChart3 className="w-5 h-5 sm:w-8 sm:h-8 text-cyan-600" />
+                <Users className="w-5 h-5 sm:w-8 sm:h-8 text-cyan-600" />
               </div>
-              <h3 className="text-sm sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">Details</h3>
-              <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">Voter details</p>
+              <h3 className="text-sm sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">Limits</h3>
+              <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">Voter limits</p>
+            </div>
+          </Link>
+
+          <Link to="/admin/election-report" className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-teal-100">
+            <div className="text-center p-3 sm:py-6 sm:px-4">
+              <div className="bg-gradient-to-r from-teal-100 to-green-100 p-2 sm:p-4 rounded-full w-10 h-10 sm:w-16 sm:h-16 mx-auto mb-2 sm:mb-4 flex items-center justify-center">
+                <BarChart3 className="w-5 h-5 sm:w-8 sm:h-8 text-teal-600" />
+              </div>
+              <h3 className="text-sm sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">Report</h3>
+              <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">Election report</p>
             </div>
           </Link>
 

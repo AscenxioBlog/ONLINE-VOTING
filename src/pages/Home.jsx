@@ -3,13 +3,18 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import Login from '../components/Auth/Login';
 import Register from '../components/Auth/Register';
+import ForgotPassword from '../components/Auth/ForgotPassword';
 import { Vote, Shield, BarChart3, X } from 'lucide-react';
 import loggo from '../components/loggo.png'; // Assuming you have a logo image
 
 const Home = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
   const { currentUser, loading } = useAuth();
+
+  // Make showForgotPassword available globally for Login component
+  window.showForgotPassword = () => setShowForgotPassword(true);
 
   if (loading) {
     return (
@@ -92,7 +97,12 @@ const Home = () => {
               >
                 <X className="w-6 h-6" />
               </button>
-              {isLogin ? (
+              {showForgotPassword ? (
+                <ForgotPassword onBack={() => {
+                  setShowForgotPassword(false);
+                  setIsLogin(true);
+                }} />
+              ) : isLogin ? (
                 <Login onToggle={() => setIsLogin(false)} />
               ) : (
                 <Register onToggle={() => setIsLogin(true)} />

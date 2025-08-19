@@ -44,6 +44,7 @@ export const createCandidate = async (candidateData) => {
   await setDoc(docRef, {
     ...candidateData,
     voteCount: 0,
+    imageUrl: candidateData.imageUrl || null,
     createdAt: new Date()
   });
   return docRef.id;
@@ -120,6 +121,48 @@ export const hasUserVoted = async (userId) => {
   } catch (error) {
     console.error('Error checking if user voted:', error);
     return false;
+  }
+};
+
+// Check voter registration limits
+export const checkVoterLimits = async (studentId) => {
+  try {
+    const limitsDoc = await getDoc(doc(db, 'settings', 'voterLimits'));
+    if (!limitsDoc.exists() || !limitsDoc.data().enableLimits) {
+      return { allowed: true };
+    }
+
+    const limits = limitsDoc.data();
+    const isHND = studentId.includes('/HND/COM/');
+    const isND = studentId.includes('/ND/COM/') || studentId.match(/\/ND\/\d{2}\//); 
+
+    // Count existing users by level
+    const usersSnapshot = await getDocs(collection(db, 'users'));
+    let hndCount = 0;
+    let ndCount = 0;
+
+    usersSnapshot.docs.forEach(doc => {
+      const userData = doc.data();
+      if (userData.studentId) {
+        if (userData.studentId.includes('/HND/COM/')) {
+          hndCount++;
+        } else if (userData.studentId.includes('/ND/COM/') || userData.studentId.match(/\/ND\/\d{2}\//)) {
+          ndCount++;
+        }
+      }
+    });
+
+    if (isHND && hndCount >= limits.hndLimit) {
+      return { allowed: false, message: `HND registration limit (${limits.hndLimit}) reached` };
+    }
+    if (isND && ndCount >= limits.ndLimit) {
+      return { allowed: false, message: `ND registration limit (${limits.ndLimit}) reached` };
+    }
+
+    return { allowed: true };
+  } catch (error) {
+    console.error('Error checking voter limits:', error);
+    return { allowed: true }; // Allow registration if check fails
   }
 };
 

@@ -8,6 +8,8 @@ import AdminDashboard from '../pages/AdminDashboard';
 import AddPost from '../pages/AddPost';
 import AddCandidate from '../pages/AddCandidate';
 import VoterList from '../pages/VoterList';
+import VoterLimits from '../pages/VoterLimits';
+import ElectionReportPage from '../pages/ElectionReportPage';
 import DetailedResults from '../pages/DetailedResults';
 import NotFound from '../pages/NotFound';
 import DashboardLayout from '../components/Layout/DashboardLayout';
@@ -82,6 +84,22 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute adminOnly>
               <VoterList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="admin/voter-limits"
+          element={
+            <ProtectedRoute adminOnly>
+              <VoterLimits />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="admin/election-report"
+          element={
+            <ProtectedRoute adminOnly>
+              <ElectionReportPage />
             </ProtectedRoute>
           }
         />

@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../../firebase/config';
 import { validateComputerScienceStudentId, extractProgramType } from '../../utils/validation';
+import { checkVoterLimits } from '../../services/firebaseService';
 import { Eye, EyeOff, Mail, Lock, User, GraduationCap } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -24,12 +25,23 @@ const Register = ({ onToggle }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    console.log('Form data:', formData);
-    console.log('Student ID validation:', validateComputerScienceStudentId(formData.studentId));
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error('Please enter a valid email address (e.g., user@example.com)');
+      return;
+    }
     
     // Validate Computer Science student ID
     if (!validateComputerScienceStudentId(formData.studentId)) {
       toast.error('Invalid student ID format. Only Computer Science students can register.\nFormat: FPI/HND/COM/YY/XXX or FPI/ND/YY/XXX');
+      return;
+    }
+
+    // Check voter registration limits
+    const limitCheck = await checkVoterLimits(formData.studentId.toUpperCase());
+    if (!limitCheck.allowed) {
+      toast.error(limitCheck.message);
       return;
     }
     
@@ -39,7 +51,6 @@ const Register = ({ onToggle }) => {
     }
 
     setLoading(true);
-    console.log('Starting registration process...');
 
     try {
       console.log('Creating user with email:', formData.email);
@@ -76,13 +87,13 @@ const Register = ({ onToggle }) => {
       console.error('Registration error:', error);
       if (error.code === 'auth/email-already-in-use') {
         toast.error('This email is already registered. Please login instead.');
-        onToggle(); // Switch to login form
+        onToggle();
       } else if (error.code === 'auth/weak-password') {
         toast.error('Password should be at least 6 characters long.');
       } else if (error.code === 'auth/invalid-email') {
-        toast.error('Please enter a valid email address.');
+        toast.error('Please enter a valid email address (e.g., user@example.com)');
       } else {
-        toast.error(`Registration failed: ${error.message}`);
+        toast.error('Registration failed. Please try again.');
       }
     } finally {
       setLoading(false);
@@ -155,7 +166,7 @@ const Register = ({ onToggle }) => {
               value={formData.email}
               onChange={handleChange}
               className="input-field pl-10"
-              placeholder="Enter your email"
+              placeholder="user@example.com"
               required
             />
           </div>

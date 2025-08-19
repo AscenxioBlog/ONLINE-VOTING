@@ -27,11 +27,22 @@ const Login = ({ onToggle }) => {
     setLoading(true);
 
     try {
-      let email = loginId;
+      let email = loginId.trim();
       
-      // If loginId looks like a student ID, find the corresponding email
-      if (!loginId.includes('@')) {
-        const cleanId = loginId.replace(/\s+/g, '').toUpperCase();
+      // Check if input is an email or student ID
+      const isEmail = email.includes('@');
+      
+      if (isEmail) {
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          toast.error('Please enter a valid email address (e.g., user@example.com)');
+          setLoading(false);
+          return;
+        }
+      } else {
+        // Handle student ID
+        const cleanId = email.replace(/\s+/g, '').toUpperCase();
         
         // Validate if it's a valid CS student ID
         if (!validateComputerScienceStudentId(cleanId)) {
@@ -53,18 +64,31 @@ const Login = ({ onToggle }) => {
         email = querySnapshot.docs[0].data().email;
       }
       
+      // Attempt Firebase authentication
       await signInWithEmailAndPassword(auth, email, password);
       toast.success('Login successful!');
     } catch (error) {
       console.error('Login error:', error);
-      if (error.code === 'auth/user-not-found') {
-        toast.error('Account not found. Please register first.');
-      } else if (error.code === 'auth/wrong-password') {
-        toast.error('Incorrect password.');
-      } else if (error.code === 'auth/invalid-email') {
-        toast.error('Please enter a valid email address.');
-      } else {
-        toast.error(`Login failed: ${error.message}`);
+      
+      // Handle specific Firebase auth errors
+      switch (error.code) {
+        case 'auth/user-not-found':
+          toast.error('Account not found. Please register first.');
+          break;
+        case 'auth/wrong-password':
+          toast.error('Incorrect password.');
+          break;
+        case 'auth/invalid-email':
+          toast.error('Invalid email format. Please check your email address.');
+          break;
+        case 'auth/user-disabled':
+          toast.error('This account has been disabled.');
+          break;
+        case 'auth/too-many-requests':
+          toast.error('Too many failed attempts. Please try again later.');
+          break;
+        default:
+          toast.error('Login failed. Please check your credentials.');
       }
     } finally {
       setLoading(false);
@@ -95,7 +119,7 @@ const Login = ({ onToggle }) => {
               value={loginId}
               onChange={(e) => setLoginId(e.target.value)}
               className="input-field pl-10"
-              placeholder="FPI/ND/COM/24/010 or email@example.com"
+              placeholder="FPI/ND/COM/24/010 or user@example.com"
               required
             />
           </div>
@@ -137,7 +161,15 @@ const Login = ({ onToggle }) => {
         </button>
       </form>
 
-      <div className="mt-6 text-center">
+      <div className="mt-6 text-center space-y-3">
+        <p className="text-gray-600">
+          <button
+            onClick={() => window.showForgotPassword && window.showForgotPassword()}
+            className="text-primary-600 hover:text-primary-700 font-medium"
+          >
+            Forgot your password?
+          </button>
+        </p>
         <p className="text-gray-600">
           Don't have an account?{' '}
           <button

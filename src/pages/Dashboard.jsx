@@ -248,6 +248,16 @@ const Dashboard = () => {
             </div>
           </Link>
 
+          <Link to="/admin/election-report" className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-blue-100">
+            <div className="text-center p-4 sm:py-8 sm:px-6">
+              <div className="bg-gradient-to-r from-blue-100 to-sky-100 p-3 sm:p-4 rounded-full w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 flex items-center justify-center">
+                <BarChart3 className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
+              </div>
+              <h3 className="text-base sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">Election Report</h3>
+              <p className="text-xs sm:text-sm text-gray-600">Detailed report</p>
+            </div>
+          </Link>
+
           {userRole === 'admin' && (
             <Link to="/admin" className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-purple-100">
               <div className="text-center p-4 sm:py-8 sm:px-6">
